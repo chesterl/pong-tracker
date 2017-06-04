@@ -1,4 +1,34 @@
-.App {
-  text-align: center;
+html, body {
+  height: 100%;
 }
 
+#root {
+  text-align: center;
+  height: 100%;
+}
+
+.container-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
+/* Spacers */
+.v-space {
+  margin-top: 30px;
+}
+
+.h-space {
+  margin-left: 30px;
+}
+
+.panel {
+  width: 300px;
+  height: 300px;
+}
+
+.btn {
+  border-radius: 0;
+}
