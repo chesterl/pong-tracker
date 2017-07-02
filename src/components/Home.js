@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import FilterLink from '../containers/FilterLink';
+
 
 class Home extends Component {
   render() {
     return (
       <div className='container-center panel panel-default'>
-        <Link to='/register'>
-          <Button bsStyle='primary' bsSize='large'>Register</Button>
-        </Link>
-        <Link to='/login'>
+        <FilterLink filter="login">
           <Button bsStyle='success v-space' bsSize='large'>Login</Button>
-        </Link>
+        </FilterLink>
+
+        <FilterLink filter="register">
+          <Button bsStyle='primary' bsSize='large'>Register</Button>
+        </FilterLink>
       </div>
     )
-
   }
 }
+
 
 export default Home;

@@ -5,11 +5,12 @@ import {
   Link
 } from 'react-router-dom';
 import './App.css';
-import Login from './Login'
-import Register from './Register'
-import Home from './Home'
+import Login from './Login';
+import Register from './Register';
+import Home from './Home';
 import * as firebase from 'firebase';
-// import { createStore } from 'redux';
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 const NoMatch = ({ location }) => (
   <div>
@@ -17,8 +18,6 @@ const NoMatch = ({ location }) => (
   </div>
 )
 
-
-// let store = createStore(login);
 
 class App extends Component {
   constructor() {
@@ -50,15 +49,19 @@ class App extends Component {
     console.log(user);
 
     return (
-      <div className="container-center">
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/login' component={Login}/>
-          <Route path='/register' component={Register}/>
-          <Route render={NoMatch} />
-        </Switch>
-        <Link to='/'>Home</Link>
-      </div>
+      <Provider>
+        <BrowserRouter>
+          <div className="container-center">
+            <Switch>
+              <Route exact path='/' component={Home}/>
+              <Route path='/login' component={Login}/>
+              <Route path='/register' component={Register}/>
+              <Route render={NoMatch} />
+            </Switch>
+            <Link to='/'>Home</Link>
+          </div>
+        </BrowserRouter>
+      </Provider>
     );
   }
 }
