@@ -8,7 +8,7 @@ class Register extends Component {
     this.handleSignUp = this.handleSignUp.bind(this);
   }
   handleSignUp() {
-    console.log("Signing up");
+    console.log('Signing up');
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     if (email.length < 4) {
@@ -35,13 +35,13 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="container-center panel panel-default">
+      <div className='container-center panel panel-default'>
         <form>
-          <div className="form-group">
-            <input className="form-control" type="text" id="email" name="email" placeholder="Email"/>
+          <div className='form-group'>
+            <input className='form-control' type='text' id='email' name='email' placeholder='Email'/>
           </div>
-          <div className="form-group">
-            <input className="form-control" type="password" id="password" name="password" placeholder="Password"/>
+          <div className='form-group'>
+            <input className='form-control' type='password' id='password' name='password' placeholder='Password'/>
           </div>
           <Button bsStyle='primary' bsSize='large' onClick={this.handleSignUp}>Sign Up</Button>
         </form>

@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
-import App from '../components/App';
 import * as firebase from 'firebase';
+import App from '../components/App';
+import NavigationBar from '../components/NavigationBar';
 
 class AppContainer extends Component {
   constructor() {
     super();
     firebase.initializeApp({
-      apiKey: "AIzaSyA803jXtR5CX3qVPQkNyUVRKyIHSX_CZZ4",
-      authDomain: "pong-tracker.firebaseapp.com",
-      databaseURL: "https://pong-tracker.firebaseio.com",
-      projectId: "pong-tracker",
-      storageBucket: "pong-tracker.appspot.com",
-      messagingSenderId: "820532121237"
+      apiKey: 'AIzaSyA803jXtR5CX3qVPQkNyUVRKyIHSX_CZZ4',
+      authDomain: 'pong-tracker.firebaseapp.com',
+      databaseURL: 'https://pong-tracker.firebaseio.com',
+      projectId: 'pong-tracker',
+      storageBucket: 'pong-tracker.appspot.com',
+      messagingSenderId: '820532121237'
     });
     this.checkLogin();
   }
@@ -26,7 +27,7 @@ class AppContainer extends Component {
         this.props.actions.userLogin({
           email
         });
-        console.log("LOGGED IN")
+        console.log('LOGGED IN')
       } else {
         this.props.actions.userLogout();
       }
@@ -34,9 +35,12 @@ class AppContainer extends Component {
   }
 
   render() {
-   return (
-     <App user={this.props.user} store={this.props.store}/>
-   )
+    return (
+      <div className='full-height'>
+        <NavigationBar user={this.props.user}/>
+        <App user={this.props.user} store={this.props.store}/>
+      </div>
+    )
  }
 }
 

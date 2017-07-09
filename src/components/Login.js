@@ -4,7 +4,7 @@ import * as firebase from 'firebase';
 
 class Login extends Component {
   handleLogin() {
-    console.log("Logging in");
+    console.log('Logging in');
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
@@ -15,19 +15,18 @@ class Login extends Component {
       var errorMessage = error.message;
       console.log(errorCode);
       console.log(errorMessage);
-
     });
   }
 
   render() {
     return (
-      <div className="container-center panel panel-default">
+      <div className='container-center panel panel-default'>
         <form>
-          <div className="form-group">
-            <input className="form-control" type="text" id="email" name="email" placeholder="Email"/>
+          <div className='form-group'>
+            <input className='form-control' type='text' id='email' name='email' placeholder='Email'/>
           </div>
-          <div className="form-group">
-            <input className="form-control" type="password" id="password" name="password" placeholder="Password"/>
+          <div className='form-group'>
+            <input className='form-control' type='password' id='password' name='password' placeholder='Password'/>
           </div>
           <Button bsStyle='primary' bsSize='large' onClick={this.handleLogin}>Login</Button>
         </form>

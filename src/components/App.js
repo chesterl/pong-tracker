@@ -9,14 +9,13 @@ import Login from './Login';
 import Register from './Register';
 import Home from './Home';
 import * as firebase from 'firebase';
-import { Provider } from "react-redux";
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { Provider } from 'react-redux';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-
 
 const NoMatch = ({ location }) => (
   <div>
-    <h3>No match for <code>{location.pathname}</code></h3>
+    <h3>Page not Found</h3>
   </div>
 )
 
@@ -29,9 +28,9 @@ class App extends Component {
   handleSignOut() {
     firebase.auth().signOut().then(() => {
       this.props.actions.userLogout();
-      console.log("LOGGED OUT");
+      console.log('LOGGED OUT');
     }).catch(function(error) {
-      console.log("ERROR LOGGING OUT");
+      console.log('ERROR LOGGING OUT');
     });
   }
 
@@ -46,7 +45,7 @@ class App extends Component {
     return (
       <Provider store={this.props.store}>
         <BrowserRouter>
-          <div className="container-center">
+          <div className='container-center'>
             <Switch>
               <Route exact path='/' component={Home}/>
               <Route path='/login' render={() => (
@@ -56,12 +55,15 @@ class App extends Component {
                   <Login />
                 )
               )}/>
-              <Route path='/register' component={Register}/>
+              <Route path='/register' render={() => (
+                this.loggedIn() ? (
+                  <Redirect to='/'/>
+                ) : (
+                  <Register />
+                )
+              )}/>
               <Route render={NoMatch} />
             </Switch>
-            <Link to='/'>Home</Link>
-            <p> SIGNED IN {email}</p>
-            <Button bsStyle='info' bsSize='large' onClick={this.handleSignOut}>Sign Out</Button>
           </div>
         </BrowserRouter>
       </Provider>
@@ -70,3 +72,10 @@ class App extends Component {
 }
 
 export default App;
+
+/* Removed
+<Link to='/'>Home</Link>
+<p> SIGNED IN {email}</p>
+<Button bsStyle='info' bsSize='large' onClick={this.handleSignOut}>Sign Out</Button>
+
+*/
