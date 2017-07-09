@@ -3,7 +3,7 @@ function user(state = {}, action) {
     case 'USER_LOGIN':
       return { ...state, ...action.user }
     case 'USER_LOGOUT':
-      return {}
+      return { user: null }
     default:
       return state
   }

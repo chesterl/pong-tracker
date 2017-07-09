@@ -3,9 +3,6 @@ import { Button } from 'react-bootstrap';
 import * as firebase from 'firebase';
 
 class Login extends Component {
-
-
-
   handleLogin() {
     console.log("Logging in");
     var email = document.getElementById('email').value;

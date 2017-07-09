@@ -10,7 +10,7 @@ import Register from './Register';
 import Home from './Home';
 import * as firebase from 'firebase';
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
 
@@ -35,6 +35,10 @@ class App extends Component {
     });
   }
 
+  loggedIn() {
+    return !(typeof(this.props.user.email) === 'undefined');
+  }
+
   render() {
     const { user } = this.props;
     const email = user.email || '';
@@ -45,12 +49,18 @@ class App extends Component {
           <div className="container-center">
             <Switch>
               <Route exact path='/' component={Home}/>
-              <Route path='/login' component={Login}/>
+              <Route path='/login' render={() => (
+                this.loggedIn() ? (
+                  <Redirect to='/'/>
+                ) : (
+                  <Login />
+                )
+              )}/>
               <Route path='/register' component={Register}/>
               <Route render={NoMatch} />
             </Switch>
             <Link to='/'>Home</Link>
-            <p> SIGNED IN  {email}</p>
+            <p> SIGNED IN {email}</p>
             <Button bsStyle='info' bsSize='large' onClick={this.handleSignOut}>Sign Out</Button>
           </div>
         </BrowserRouter>
