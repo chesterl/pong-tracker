@@ -8,11 +8,11 @@ class Home extends Component {
     return (
       <div className='container-center panel panel-default'>
         <FilterLink filter="login">
-          <Button bsStyle='success v-space' bsSize='large'>Login</Button>
+          <Button bsStyle='success' bsSize='large'>Login</Button>
         </FilterLink>
 
         <FilterLink filter="register">
-          <Button bsStyle='primary' bsSize='large'>Register</Button>
+          <Button bsStyle='primary' className='v-space' bsSize='large'>Register</Button>
         </FilterLink>
       </div>
     )

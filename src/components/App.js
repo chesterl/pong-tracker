@@ -11,6 +11,8 @@ import Home from './Home';
 import * as firebase from 'firebase';
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
+import { Button } from 'react-bootstrap';
+
 
 const NoMatch = ({ location }) => (
   <div>
@@ -18,10 +20,10 @@ const NoMatch = ({ location }) => (
   </div>
 )
 
-
 class App extends Component {
   constructor() {
     super();
+    this.handleSignOut = this.handleSignOut.bind(this);
 
     firebase.initializeApp({
       apiKey: "AIzaSyA803jXtR5CX3qVPQkNyUVRKyIHSX_CZZ4",
@@ -31,25 +33,35 @@ class App extends Component {
       storageBucket: "pong-tracker.appspot.com",
       messagingSenderId: "820532121237"
     });
-    firebase.auth().onAuthStateChanged((user) => {
-      console.log('checking login')
-      if (user) {
-        this.props.actions.userLogin(user)
+    firebase.auth().onAuthStateChanged((response) => {
+      if (response) {
+        const email = response.email;
+        this.props.actions.userLogin({
+          email
+        });
         console.log("logged in")
-        // ...
       } else {
         // store.dispatch({ type: 'FAILED_LOGIN' });
       }
     });
   }
 
+  handleSignOut() {
+    firebase.auth().signOut().then(() => {
+      this.props.actions.userLogout();
+      console.log("logged out");
+    }).catch(function(error) {
+      console.log("error logging out");
+    });
+  }
+
   render() {
     const { user } = this.props;
-
-    console.log(user);
+    const email = user.email || '';
+    console.log(user)
 
     return (
-      <Provider>
+      <Provider store={this.props.store}>
         <BrowserRouter>
           <div className="container-center">
             <Switch>
@@ -59,6 +71,8 @@ class App extends Component {
               <Route render={NoMatch} />
             </Switch>
             <Link to='/'>Home</Link>
+            <p> SIGNED IN {email} </p>
+            <Button bsStyle='info' bsSize='large' onClick={this.handleSignOut}>Sign Out</Button>
           </div>
         </BrowserRouter>
       </Provider>
