@@ -24,41 +24,20 @@ class App extends Component {
   constructor() {
     super();
     this.handleSignOut = this.handleSignOut.bind(this);
-
-    firebase.initializeApp({
-      apiKey: "AIzaSyA803jXtR5CX3qVPQkNyUVRKyIHSX_CZZ4",
-      authDomain: "pong-tracker.firebaseapp.com",
-      databaseURL: "https://pong-tracker.firebaseio.com",
-      projectId: "pong-tracker",
-      storageBucket: "pong-tracker.appspot.com",
-      messagingSenderId: "820532121237"
-    });
-    firebase.auth().onAuthStateChanged((response) => {
-      if (response) {
-        const email = response.email;
-        this.props.actions.userLogin({
-          email
-        });
-        console.log("logged in")
-      } else {
-        // store.dispatch({ type: 'FAILED_LOGIN' });
-      }
-    });
   }
 
   handleSignOut() {
     firebase.auth().signOut().then(() => {
       this.props.actions.userLogout();
-      console.log("logged out");
+      console.log("LOGGED OUT");
     }).catch(function(error) {
-      console.log("error logging out");
+      console.log("ERROR LOGGING OUT");
     });
   }
 
   render() {
     const { user } = this.props;
     const email = user.email || '';
-    console.log(user)
 
     return (
       <Provider store={this.props.store}>
@@ -71,7 +50,7 @@ class App extends Component {
               <Route render={NoMatch} />
             </Switch>
             <Link to='/'>Home</Link>
-            <p> SIGNED IN {email} </p>
+            <p> SIGNED IN  {email}</p>
             <Button bsStyle='info' bsSize='large' onClick={this.handleSignOut}>Sign Out</Button>
           </div>
         </BrowserRouter>

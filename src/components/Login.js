@@ -3,11 +3,15 @@ import { Button } from 'react-bootstrap';
 import * as firebase from 'firebase';
 
 class Login extends Component {
+
+
+
   handleLogin() {
     console.log("Logging in");
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
 
+    // TODO: Handle errors
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
