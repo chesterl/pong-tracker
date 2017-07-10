@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 // import FilterLink from '../containers/FilterLink';
 // import { Link } from 'react-router-dom';
 
-
 class NavigationBar extends Component {
   constructor() {
     super();
@@ -34,6 +33,9 @@ class NavigationBar extends Component {
             <NavItem>
               Logged in as {this.props.user.email}
             </NavItem>
+            <NavItem href='/profile/edit'>
+              Profile
+            </NavItem>
             <NavItem onClick={this.handleSignOut}>
               Sign out
             </NavItem>
@@ -47,8 +49,6 @@ class NavigationBar extends Component {
   }
 
   render() {
-    console.log('navbar',this.props);
-
     return(
       <Navbar>
         <Navbar.Header>

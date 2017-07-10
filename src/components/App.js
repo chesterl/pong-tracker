@@ -8,6 +8,7 @@ import './App.css';
 import Login from './Login';
 import Register from './Register';
 import Home from './Home';
+import Profile from './Profile';
 import * as firebase from 'firebase';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Redirect } from 'react-router-dom';
@@ -62,6 +63,7 @@ class App extends Component {
                   <Register />
                 )
               )}/>
+              <Route path='/profile/edit' render={() => <Profile user={this.props.user}/>} />
               <Route render={NoMatch} />
             </Switch>
           </div>

@@ -24,8 +24,11 @@ class AppContainer extends Component {
     firebase.auth().onAuthStateChanged((response) => {
       if (response) {
         const email = response.email;
+        const userId = response.uid;
+
         this.props.actions.userLogin({
-          email
+          email,
+          userId
         });
         console.log('LOGGED IN')
       } else {
@@ -36,7 +39,7 @@ class AppContainer extends Component {
 
   render() {
     return (
-      <div className='full-height'>
+      <div>
         <NavigationBar user={this.props.user}/>
         <App user={this.props.user} store={this.props.store}/>
       </div>
